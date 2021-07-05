@@ -1,5 +1,6 @@
 package com.kabir.milton;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Main {
@@ -27,9 +28,19 @@ public class Main {
                 }
             }
         }
+        int cnt=0,cur=0,tot=x*y*10;;
+        if(x*y<=60){
+            tot=x*y*10;
+        }
+        else{
+            int x1=x/2;
+            int x2=x-x1;
+            tot=(x1*10+x2*8)*y;
+        }
         while(true){
             System.out.println("1. Show the seats\n" +
                     "2. Buy a ticket\n" +
+                    "3. Statistics\n" +
                     "0. Exit");
             int ck=sc.nextInt();
             if(ck==0){
@@ -44,24 +55,51 @@ public class Main {
                     System.out.println();
                 }
             }
+            else if(ck==3){
+                double cur1=(double) cnt;
+                double tot1=(double)x*y;
+                double roundOff = Math.round(cur1* 100.0) / tot1;
+                DecimalFormat f = new DecimalFormat("0.00");
+                System.out.println("Number of purchased tickets: "+cnt+"\n" +
+                        "Percentage: "+f.format(roundOff)+"%\n" +
+                        "Current income: $"+cur+"\n" +
+                        "Total income: $"+tot);
+            }
             else{
-                int xx,yy;
-                System.out.println("Enter a row number:");
-                xx=sc.nextInt();
-                System.out.println("Enter a seat number in that row:");
-                yy=sc.nextInt();
-                ar[xx]=ar[xx].substring(0,yy)+'B'+ar[xx].substring(yy+1);
-                if(x*y<=60){
-                    System.out.println("Ticket price: $10");
-                }
-                else{
-                    int x1=x/2;
-                    if(xx<=x1){
-                        System.out.println("Ticket price: $10");
+                while (true){
+                    int xx,yy;
+                    System.out.println("Enter a row number:");
+                    xx=sc.nextInt();
+                    System.out.println("Enter a seat number in that row:");
+                    yy=sc.nextInt();
+                    if(xx>x||yy>y){
+                        System.out.println("Wrong input!");
+                    }
+                    else if(ar[xx].charAt(yy)=='B'){
+                        System.out.println("That ticket has already been purchased!");
                     }
                     else{
-                        System.out.println("Ticket price: $8");
+                        ar[xx]=ar[xx].substring(0,yy)+'B'+ar[xx].substring(yy+1);
+                        cnt++;
+                        if(x*y<=60){
+                            System.out.println("Ticket price: $10");
+                            cur+=10;
+                        }
+                        else{
+                            int x1=x/2;
+                            if(xx<=x1){
+                                System.out.println("Ticket price: $10");
+                                cur+=10;
+                            }
+                            else{
+                                System.out.println("Ticket price: $8");
+                                cur+=8;
+                            }
+                        }
+
+                        break;
                     }
+
                 }
             }
         }
