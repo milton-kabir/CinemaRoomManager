@@ -27,44 +27,42 @@ public class Main {
                 }
             }
         }
-        System.out.println("Cinema:");
-        for(int i=0;i<=x;i++){
-            for(int j=0;j<=y;j++){
-                System.out.print(ar[i].charAt(j)+" ");
+        while(true){
+            System.out.println("1. Show the seats\n" +
+                    "2. Buy a ticket\n" +
+                    "0. Exit");
+            int ck=sc.nextInt();
+            if(ck==0){
+                break;
             }
-            System.out.println();
-        }
-        int xx,yy;
-        System.out.println("Enter a row number:");
-        xx=sc.nextInt();
-        System.out.println("Enter a seat number in that row:");
-        yy=sc.nextInt();
-        if(x*y<=60){
-            System.out.println("Ticket price: $10");
-            ar[xx]=ar[xx].substring(0,yy)+'B'+ar[xx].substring(yy+1);
-            System.out.println("Cinema:");
-            for(int i=0;i<=x;i++){
-                for(int j=0;j<=y;j++){
-                    System.out.print(ar[i].charAt(j)+" ");
+            else if(ck==1){
+                System.out.println("Cinema:");
+                for(int i=0;i<=x;i++){
+                    for(int j=0;j<=y;j++){
+                        System.out.print(ar[i].charAt(j)+" ");
+                    }
+                    System.out.println();
                 }
-                System.out.println();
-            }
-        }
-        else{
-            int x1=x/2;
-            if(xx<=x1){
-                System.out.println("Ticket price: $10");
             }
             else{
-                System.out.println("Ticket price: $8");
-            }
-            ar[xx]=ar[xx].substring(0,yy)+'B'+ar[xx].substring(yy+1);
-            System.out.println("Cinema:");
-            for(int i=0;i<=x;i++){
-                for(int j=0;j<=y;j++){
-                    System.out.print(ar[i].charAt(j)+" ");
+                int xx,yy;
+                System.out.println("Enter a row number:");
+                xx=sc.nextInt();
+                System.out.println("Enter a seat number in that row:");
+                yy=sc.nextInt();
+                ar[xx]=ar[xx].substring(0,yy)+'B'+ar[xx].substring(yy+1);
+                if(x*y<=60){
+                    System.out.println("Ticket price: $10");
                 }
-                System.out.println();
+                else{
+                    int x1=x/2;
+                    if(xx<=x1){
+                        System.out.println("Ticket price: $10");
+                    }
+                    else{
+                        System.out.println("Ticket price: $8");
+                    }
+                }
             }
         }
     }
